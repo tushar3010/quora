@@ -38,14 +38,16 @@
 			<%= q.content %>
 			<%= q.user.email%>
 
-	<%= form_tag url_for(controller: 'home',action: 'ans',method: :post) do %>
-	<%= text_area_tag :answer %>
-	<%= hidden_field_tag :ques,q.id %>
-	<%= submit_tag 'submit' %>
-	<% end %>
+			<%= form_tag url_for(controller: 'home',action: 'ans',method: :post) do %>
+			<%= text_area_tag :answer %>
+			<%= hidden_field_tag :ques,q.id %>
+			<%= submit_tag 'submit' %>
+			<% end %>
 
-
-		
+			<button type="submit" name="upvote" value="upvote">Upvote
+				<%= hidden_field_tag :question_id, q.id %>
+			</button> <%= @count %>
+			
 		</span>
 		
 	</div>

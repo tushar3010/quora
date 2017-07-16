@@ -16,8 +16,20 @@ class HomeController < ApplicationController
 	def ans
 		answer = params[:answer]
 		ques = current_user.questions.find(params[:ques])
-				byebug
 		ques.answers.create(:answer => answer)
+		redirect_to '/'
+	end
+
+	def upvote
+		up= params[:upvote]
+		upvote = QuestionUpvote.find(up)
+		if upvote.nil?
+			QuestionUpvote.create(:question_id =>question_id)
+			@count = QuestionUpvote.all.count
+		else
+			upvote.destroy
+		end
+
 		redirect_to '/'
 	end
 
