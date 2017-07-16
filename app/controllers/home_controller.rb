@@ -3,8 +3,7 @@ class HomeController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@questions = Question.all
-		@answers = Answer.all
+		@questions = Question.includes(:answers).all
 	end
 
 	def ques 

@@ -38,6 +38,10 @@
 			<%= q.content %>
 			<%= q.user.email%>
 
+			<% q.answers.each do |a| %>
+				<li><%= a.answer %></li>
+			<% end %>
+
 			<%= form_tag url_for(controller: 'home',action: 'ans',method: :post) do %>
 			<%= text_area_tag :answer %>
 			<%= hidden_field_tag :ques,q.id %>
