@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quora</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+ <% if user_signed_in? %>
+<header>
+
+<div class="logo">
+<%= image_tag 'images.png' %>
+</div>
+
+
+<nav>
+
+<ul>
+<li> <%= link_to "Users", '/' %> </li>
+<li>  <%= link_to "Sign Out",destroy_user_session_path,method: :delete %></li>
+</ul>
+</nav>
+
+
+</header>
+
+
+ <% end %>
+
+
+
+
+
+
+
+<%= yield %>
+
+</body>
+</html>

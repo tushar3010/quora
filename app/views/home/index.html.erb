@@ -1,0 +1,64 @@
+<main>
+	
+<aside>
+
+</aside>
+
+<section>
+
+<div class="create_ques">
+
+
+<%= form_tag url_for(controller: 'home',action: 'ques',method: :post) do %>
+
+	<%= text_area_tag :content %>
+	<%= submit_tag 'Ask' %>
+
+<% end %>
+
+     
+</div>
+
+<div id="questions">
+
+	<%  @questions.each do |q|  %>
+
+	<div class="question">
+
+	<div class="ques">	
+		
+
+		<span class="userImage">
+				<img src="">
+		</span>
+
+		<span class="right">
+			
+			
+			<%= q.content %>
+			<%= q.user.email%>
+
+	<%= form_tag url_for(controller: 'home',action: 'ans',method: :post) do %>
+	<%= text_area_tag :answer %>
+	<%= hidden_field_tag :ques,q.id %>
+	<%= submit_tag 'submit' %>
+	<% end %>
+
+
+		
+		</span>
+		
+	</div>
+
+
+
+	</div>
+		<% end %>
+</div>
+
+</section>
+
+
+
+</main>
+
