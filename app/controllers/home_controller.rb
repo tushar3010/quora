@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@questions = Question.includes(:answers).all
+		@questions = Question.includes(:answers,:question_upvotes).all
 	end
 
 	def ques 
@@ -21,12 +21,10 @@ class HomeController < ApplicationController
 
 	def upvote
 		up= params[:upvote]
-		upvote = QuestionUpvote.find(up)
-		if upvote.nil?
-			QuestionUpvote.create(:question_id =>question_id)
-			@count = QuestionUpvote.all.count
+		if up.nil?
+			QuestionUpvote.create(:user_id => current_user.id,:question_id => params[:q_id])
 		else
-			upvote.destroy
+			QuestionUpvote.find(up).destroy
 		end
 
 		redirect_to '/'

@@ -1,5 +1,6 @@
 class QuestionUpvote < ActiveRecord::Base
-  belongs_to :questions
+  belongs_to :question
+  belongs_to :user
 
 def upvote_string user_id
   	if question_id_upvoted_by user_id
@@ -7,6 +8,10 @@ def upvote_string user_id
   	else
   		return "Upvote"
   	end
+end
+
+def self.upvote id,user_id
+	QuestionUpvote.where(:question_id => id,:user_id => user_id)
 end
 
 

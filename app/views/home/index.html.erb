@@ -44,13 +44,17 @@
 
 			<%= form_tag url_for(controller: 'home',action: 'ans',method: :post) do %>
 			<%= text_area_tag :answer %>
+			<%= q.question_upvotes.count %>
 			<%= hidden_field_tag :ques,q.id %>
 			<%= submit_tag 'submit' %>
 			<% end %>
 
-			<button type="submit" name="upvote" value="upvote">Upvote
-				<%= hidden_field_tag :question_id, q.id %>
-			</button> <%= @count %>
+			<% upvote = QuestionUpvote.upvote q.id,current_user.id %>
+			<% if upvote.count==0 %>
+				<%= link_to 'Upvote', {:controller => "home", :action => "upvote",:q_id => q.id },method: :post %>
+			<% else %>
+			<%= link_to 'DownVote', {:controller => "home", :action => "upvote",:upvote => upvote.first.id },method: :post %>
+			<% end %>
 			
 		</span>
 		
